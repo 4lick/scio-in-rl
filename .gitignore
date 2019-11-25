@@ -1,0 +1,11 @@
+node_modules/
+.idea/
+target/
+project/project/
+project/target/
+**/.credentials.yaml
+**/.DS_Store
+.idea/*
+.DS_Store
+**/.DS_Store
+.idea-bk/
