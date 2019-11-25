@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  mysql:
+    #image: mysql:5.7
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+    - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: color
+
+  elasticsearch:
+    #image: docker.elastic.co/elasticsearch/elasticsearch:5.6.4
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.5.3
+    ports:
+    - 9200:9200
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.watcher.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g      
+      
+  color:
+    image: 4lick/color
+    ports:
+      - "3000:3000"
+    links:
+      - elasticsearch
+      - mysql
+    environment:
+      ES_HOST: elasticsearch
+      DB_HOST: mysql
+      
