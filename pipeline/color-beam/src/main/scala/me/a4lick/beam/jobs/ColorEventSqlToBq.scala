@@ -71,7 +71,7 @@ object ColorEventSqlToBq {
         Event(userId, color, source, created)
       })
 
-    val result = tsql"SELECT u.*, e.color, e.source, e.created FROM $u as u INNER JOIN $e as e ON $u.id = $e.userId"
+    val result = tsql"SELECT u.*, e.color, e.source, e.created FROM $u INNER JOIN $e ON $u.id = $e.userId"
       .as[(Int, String, String, String, String, String, Instant)]
 
     result.map(e => {
@@ -81,6 +81,7 @@ object ColorEventSqlToBq {
       ColorEvent(event_id = id,
         event_timestamp = now,
         event_processed_at = now,
+        event_source = "BATCH_SQL",
         user_id = e._1,
         name = e._2,
         email = e._3,

@@ -16,7 +16,7 @@ sbt "run-main me.a4lick.beam.jobs.ColorEventStreamToBq \
 --numWorkers=1
 --maxNumWorkers=1
 --autoscalingAlgorithm=THROUGHPUT_BASED
---apiHost=localhost
+--apiHost=http://localhost
 --apiPort=3000
 --bigQueryProjectId=bustling-folio-241315
 --bigQueryDataset=DEMO

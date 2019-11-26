@@ -36,6 +36,7 @@ object DataflowSteps {
       ColorEvent(event_id = getUUID,
         event_timestamp = now,
         event_processed_at = now,
+        event_source = "BATCH_FILE",
         name = user._1,
         email = user._2,
         country = user._3,

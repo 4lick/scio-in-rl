@@ -2,6 +2,7 @@ package me.a4lick.beam.jobs
 
 import com.spotify.scio.ScioContext
 import com.spotify.scio.util.MultiJoin
+import me.a4lick.beam.models.ColorEvent.ColorEvent
 import me.a4lick.beam.options.ColorEsToBqOptions
 import me.a4lick.beam.services.DataflowSteps._
 import me.a4lick.beam.utils.ISO8601DateTimeFormatter
@@ -69,12 +70,34 @@ object ColorEventStreamToBq {
         userId -> (color, source, created)
       })
 
+    def toColorEvent = (t: (Int, (Iterable[(String, String, String)], Iterable[(String, String, Instant)]))) => {
+      val userId = t._1
+      val user = t._2._1.toSet.head
+      val events = t._2._2.toSet
+
+      events.map(e => {
+        val now = new Instant(System.currentTimeMillis)
+
+        ColorEvent(event_id = getUUID,
+          event_timestamp = now,
+          event_processed_at = now,
+          event_source = "STREAM",
+          name = user._1,
+          email = user._2,
+          country = user._3,
+          color = e._1,
+          source = e._2,
+          created = e._3,
+          user_id = userId)
+      })
+    }
+
     MultiJoin.cogroup(userInfo, eventInfo)
       .map(toColorEvent)
       .flatten
       .withName("Write To BQ")
       .saveAsTypedBigQuery(bqTable, WriteDisposition.WRITE_APPEND)
 
-    sc.run()
+    sc.run().waitUntilFinish()
   }
 }

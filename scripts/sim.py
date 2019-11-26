@@ -32,7 +32,7 @@ def get_event():
           'color': random.choice(colors),
           'source': random.choice(source),
           'created': datetime.datetime.utcnow().strftime(RFC3339_TIME_FORMAT),
-          'user_id': random.randint(1001,1100)
+          'user_id': random.randint(1001,1099)
      })
      return event
 

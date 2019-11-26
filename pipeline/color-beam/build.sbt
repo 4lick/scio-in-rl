@@ -50,8 +50,9 @@ lazy val root: Project = project
       "com.google.auto.value" % "auto-value" % "1.3",
       "com.typesafe.play" %% "play-ws" % "2.6.10",
       "com.typesafe.play" %% "play-ahc-ws-standalone" % "1.1.1",
-      "com.typesafe.play" %% "play-ws-standalone-json" % "1.1.1"
-    )
+      "com.typesafe.play" %% "play-ws-standalone-json" % "1.1.1",
+       "org.joda" % "joda-convert" % "1.8.1"
+)
   )
   .enablePlugins(PackPlugin)
 

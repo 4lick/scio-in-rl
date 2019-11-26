@@ -9,6 +9,7 @@ object ColorEvent {
   case class ColorEvent(event_id: String,
       event_timestamp: Instant,
       event_processed_at: Instant,
+      event_source: String,
       name: String,
       email: String,
       country: String,
