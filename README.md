@@ -12,6 +12,7 @@ Prerequisites
 - GCP Account
 - Python 3.x
 - Scala 
+- User Account Credentials File
 
 Getting Started _(local run)_
 =============================
@@ -40,6 +41,16 @@ docker-compose up -d
 - curl localhost:3000/users/1049
 ```
 
-3. pipelines
-* wizard take place...
+3. Input File
+```
+gsutil cp data/events-full.json gs://4lick/demo/events.json
+```
+
+4. Pub/Sub Color User Event
+```
+./scripts/sim.py --project PROJECT_NAME --topic color --nbMsg 5
+```
+
+5. pipelines
+* The wizard take place...
 
