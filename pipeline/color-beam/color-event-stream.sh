@@ -12,7 +12,7 @@ sbt "run-main me.a4lick.beam.jobs.ColorEventStreamToBq \
 --exitAfterSubmit=true
 --keepJobsRunning=true
 --jobName=color-event
---workerMachineType=n1-standard-8
+--workerMachineType=n1-standard-4
 --numWorkers=1
 --maxNumWorkers=1
 --autoscalingAlgorithm=THROUGHPUT_BASED

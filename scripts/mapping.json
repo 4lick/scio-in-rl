@@ -1,0 +1,24 @@
+{
+  "mappings": {
+    "event": {
+      "properties": {
+        "created": {
+          "format": "strict_date_optional_time||epoch_millis",
+          "type": "date"
+        },
+        "user_id": {
+          "type": "keyword"
+        },
+        "source": {
+          "type": "text"
+        },
+        "color": {
+          "type": "text"
+        }
+      },
+      "_all": {
+        "enabled": false
+      }
+    }
+  }
+}
